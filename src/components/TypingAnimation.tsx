@@ -30,14 +30,20 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({ text, className, spee
   }, [text, speed]);
 
   return (
-    <h1 className={className}>
-      {displayedText}
-      <span
-        className={`ml-2 inline-block w-1 h-[0.8em] bg-white transition-opacity duration-300 ${
-          isComplete ? "opacity-100 animate-blink" : "opacity-0"
-        }`}
-      ></span>
-    </h1>
+    <div className="relative">
+      <h1 className={`${className} invisible`}>
+        {text}
+        <span className="ml-2 inline-block w-1 h-[0.8em]"></span>
+      </h1>
+      <h1 className={`${className} absolute top-0 left-0 w-full`}>
+        {displayedText}
+        <span
+          className={`ml-2 inline-block w-1 h-[0.8em] bg-white transition-opacity duration-300 ${
+            isComplete ? "opacity-100 animate-blink" : "opacity-0"
+          }`}
+        ></span>
+      </h1>
+    </div>
   );
 };
 

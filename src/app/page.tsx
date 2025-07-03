@@ -15,6 +15,7 @@ import ScrambleText from "@/components/ScrambleText";
 import CountUp from "@/components/CountUp";
 import Marquee from "@/components/Marquee";
 import ScrollTriggerText from "@/components/ScrollTriggerText";
+import SlideUp from "@/components/SlideUp";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -144,13 +145,15 @@ export default function Home() {
         <div className="container mx-auto px-5 md:px-10 h-screen flex flex-col justify-center items-center text-center">
           <TypingAnimation
             text="Digital Creative Studio"
-            className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[8rem] font-bold leading-[0.9] mb-8 max-w-6xl"
+            className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[8rem] font-bold leading-[0.9] mb-8 max-w-6xl text-white"
           />
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-4xl mx-auto text-neutral-300 px-4">
-            Line Studio® is a versatile creative studio specializing in Branding, Web Design, and Development. We
-            empower clients to elevate their brands, expand their reach, and distinguish themselves in their industry
-            through impactful solutions and innovative design.
-          </p>
+          <SlideUp offset="translate-y-12" duration={1000} delay={500}>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-4xl mx-auto text-neutral-300 px-4">
+              Line Studio® is a versatile creative studio specializing in Branding, Web Design, and Development. We
+              empower clients to elevate their brands, expand their reach, and distinguish themselves in their industry
+              through impactful solutions and innovative design.
+            </p>
+          </SlideUp>
         </div>
       </section>
 
