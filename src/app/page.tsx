@@ -171,10 +171,10 @@ export default function Home() {
           }}
         ></div>
         <div className="container mx-auto px-5 md:px-10 h-screen flex flex-col justify-center items-center text-center">
-          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[8rem] font-bold leading-[0.9] mb-8 opacity-0 animate-fade-in-up max-w-6xl">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[8rem] font-bold leading-[0.9] mb-8 max-w-6xl">
             Digital Creative Studio
           </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-4xl mx-auto opacity-0 translate-y-8 animate-fade-in-up-delay text-neutral-300 px-4">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-4xl mx-auto text-neutral-300 px-4">
             Line Studio® is a versatile creative studio specializing in Branding, Web Design, and Development. We
             empower clients to elevate their brands, expand their reach, and distinguish themselves in their industry
             through impactful solutions and innovative design.
