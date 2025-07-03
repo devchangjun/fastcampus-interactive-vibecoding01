@@ -10,10 +10,6 @@ import Footer from "../components/Footer";
 import ParticleField from "@/components/ParticleField";
 import Image from "next/image";
 import { FiAward, FiBarChart2, FiBriefcase } from "react-icons/fi";
-import TypingAnimation from "@/components/TypingAnimation";
-import ScrambleText from "@/components/ScrambleText";
-import CountUp from "@/components/CountUp";
-import Marquee from "@/components/Marquee";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -141,10 +137,9 @@ export default function Home() {
           }}
         ></div>
         <div className="container mx-auto px-5 md:px-10 h-screen flex flex-col justify-center items-center text-center">
-          <TypingAnimation
-            text="Digital Creative Studio"
-            className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[8rem] font-bold leading-[0.9] mb-8 max-w-6xl"
-          />
+          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[8rem] font-bold leading-[0.9] mb-8 max-w-6xl">
+            Digital Creative Studio
+          </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-4xl mx-auto text-neutral-300 px-4">
             Line Studio® is a versatile creative studio specializing in Branding, Web Design, and Development. We
             empower clients to elevate their brands, expand their reach, and distinguish themselves in their industry
@@ -167,10 +162,7 @@ export default function Home() {
               />
             </div>
             <div>
-              <ScrambleText
-                text="Design with Purpose"
-                className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6"
-              />
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">Design with Purpose</h2>
               <p className="text-lg md:text-xl text-neutral-300 leading-relaxed mb-8">
                 Our expertise is in designing visuals that effectively connect with the target audience. We create
                 memorable brand experiences through strategic design thinking and cutting-edge technology.
@@ -200,13 +192,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Marquee Section */}
-      <section className="py-10 md:py-20">
-        <Marquee baseVelocity={-1} className="text-4xl md:text-6xl font-bold">
-          Line Studio® • Design with Purpose •&nbsp;
-        </Marquee>
-      </section>
-
       {/* Stats Section */}
       <section className="py-20 md:py-32 bg-neutral-900">
         <div className="container mx-auto px-5 md:px-10">
@@ -214,21 +199,21 @@ export default function Home() {
             {/* Stat Card 1 */}
             <div className="stat-item bg-neutral-800/50 p-8 rounded-lg opacity-0 translate-y-8 transition-all duration-500 ease-in-out">
               <FiBriefcase className="text-4xl text-white mx-auto mb-4" />
-              <CountUp endValue={19} suffix="+" className="block text-5xl font-bold text-white" />
+              <span className="block text-5xl font-bold text-white">19+</span>
               <h3 className="text-lg font-semibold text-neutral-300 mt-3">Featured Work</h3>
               <p className="text-neutral-400 mt-2 text-sm">Recognized for excellence in design and development.</p>
             </div>
             {/* Stat Card 2 */}
             <div className="stat-item bg-neutral-800/50 p-8 rounded-lg opacity-0 translate-y-8 transition-all duration-500 ease-in-out delay-150">
               <FiBarChart2 className="text-4xl text-white mx-auto mb-4" />
-              <CountUp endValue={350} suffix="+" className="block text-5xl font-bold text-white" />
+              <span className="block text-5xl font-bold text-white">350+</span>
               <h3 className="text-lg font-semibold text-neutral-300 mt-3">Projects Completed</h3>
               <p className="text-neutral-400 mt-2 text-sm">Delivering impactful solutions across various industries.</p>
             </div>
             {/* Stat Card 3 */}
             <div className="stat-item bg-neutral-800/50 p-8 rounded-lg opacity-0 translate-y-8 transition-all duration-500 ease-in-out delay-300">
               <FiAward className="text-4xl text-white mx-auto mb-4" />
-              <CountUp endValue={39} suffix="+" className="block text-5xl font-bold text-white" />
+              <span className="block text-5xl font-bold text-white">39+</span>
               <h3 className="text-lg font-semibold text-neutral-300 mt-3">Awwwards Featured</h3>
               <p className="text-neutral-400 mt-2 text-sm">Honored by the most prestigious web design awards.</p>
             </div>
