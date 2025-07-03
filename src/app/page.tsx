@@ -20,6 +20,7 @@ import SlideUp from "@/components/SlideUp";
 export default function Home() {
   const [email, setEmail] = useState("");
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const [isAboutSectionScrolled, setIsAboutSectionScrolled] = useState(false);
 
   // Smooth scrolling function
   const scrollToSection = (sectionId: string) => {
@@ -56,6 +57,26 @@ export default function Home() {
 
     return () => {
       observerRef.current?.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const aboutSection = document.getElementById("about");
+    if (!aboutSection) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsAboutSectionScrolled(entry.isIntersecting);
+      },
+      {
+        threshold: 0.6,
+      }
+    );
+
+    observer.observe(aboutSection);
+
+    return () => {
+      observer.disconnect();
     };
   }, []);
 
@@ -158,7 +179,12 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="py-20 md:py-32" id="about">
+      <section
+        className={`py-20 md:py-32 transition-colors duration-700 ${
+          isAboutSectionScrolled ? "bg-white" : "bg-transparent"
+        }`}
+        id="about"
+      >
         <div className="container mx-auto px-5 md:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative w-full h-96 lg:h-[30rem]">
@@ -173,35 +199,82 @@ export default function Home() {
             <div>
               <ScrambleText
                 text="Design with Purpose"
-                className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6"
+                className={`text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 transition-colors duration-700 ${
+                  isAboutSectionScrolled ? "text-black" : "text-white"
+                }`}
               />
               <ScrollTriggerText
                 className="text-lg md:text-xl leading-relaxed mb-8"
-                fromColor="#737373"
-                toColor="#d4d4d4"
+                fromColor={isAboutSectionScrolled ? "#a3a3a3" : "#737373"}
+                toColor={isAboutSectionScrolled ? "#171717" : "#d4d4d4"}
               >
                 Our expertise is in designing visuals that effectively connect with the target audience. We create
                 memorable brand experiences through strategic design thinking and cutting-edge technology.
               </ScrollTriggerText>
               <ul className="space-y-4 mb-10">
                 <li className="flex items-center gap-4">
-                  <span className="text-xl text-white">✓</span>
-                  <p className="text-neutral-300 text-lg">Insight-driven Strategy</p>
+                  <span
+                    className={`text-xl transition-colors duration-700 ${
+                      isAboutSectionScrolled ? "text-black" : "text-white"
+                    }`}
+                  >
+                    ✓
+                  </span>
+                  <p
+                    className={`text-lg transition-colors duration-700 ${
+                      isAboutSectionScrolled ? "text-neutral-700" : "text-neutral-300"
+                    }`}
+                  >
+                    Insight-driven Strategy
+                  </p>
                 </li>
                 <li className="flex items-center gap-4">
-                  <span className="text-xl text-white">✓</span>
-                  <p className="text-neutral-300 text-lg">Human-centered Design</p>
+                  <span
+                    className={`text-xl transition-colors duration-700 ${
+                      isAboutSectionScrolled ? "text-black" : "text-white"
+                    }`}
+                  >
+                    ✓
+                  </span>
+                  <p
+                    className={`text-lg transition-colors duration-700 ${
+                      isAboutSectionScrolled ? "text-neutral-700" : "text-neutral-300"
+                    }`}
+                  >
+                    Human-centered Design
+                  </p>
                 </li>
                 <li className="flex items-center gap-4">
-                  <span className="text-xl text-white">✓</span>
-                  <p className="text-neutral-300 text-lg">Innovative Technology</p>
+                  <span
+                    className={`text-xl transition-colors duration-700 ${
+                      isAboutSectionScrolled ? "text-black" : "text-white"
+                    }`}
+                  >
+                    ✓
+                  </span>
+                  <p
+                    className={`text-lg transition-colors duration-700 ${
+                      isAboutSectionScrolled ? "text-neutral-700" : "text-neutral-300"
+                    }`}
+                  >
+                    Innovative Technology
+                  </p>
                 </li>
               </ul>
               <Link
                 href="#contact"
-                className="inline-block py-4 px-8 bg-transparent border border-neutral-600 text-white no-underline rounded-full"
+                className={`inline-block py-4 px-8 border no-underline rounded-full transition-colors duration-500 relative overflow-hidden group ${
+                  isAboutSectionScrolled
+                    ? "border-neutral-400 text-black hover:bg-black hover:text-white"
+                    : "bg-transparent border-neutral-600 text-white hover:bg-white hover:text-black"
+                }`}
               >
-                Work with us
+                <span className="inline-block transition-transform duration-500 ease-in-out group-hover:-translate-y-[150%]">
+                  Work with us
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-in-out translate-y-full group-hover:translate-y-0">
+                  Contact Us
+                </span>
               </Link>
             </div>
           </div>
