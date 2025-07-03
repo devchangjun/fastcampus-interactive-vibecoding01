@@ -8,6 +8,8 @@ import BlogCard from "../components/BlogCard";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import ParticleField from "@/components/ParticleField";
+import Image from "next/image";
+import { FiAward, FiBarChart2, FiBriefcase } from "react-icons/fi";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -147,54 +149,73 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section
-        className="fade-in py-20 md:py-30 px-5 md:px-10 max-w-6xl mx-auto opacity-0 translate-y-8 transition-all duration-700 ease-in-out"
-        id="about"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20 items-center">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-center md:text-left">
-            About Us
-          </h2>
-          <div className="md:col-span-2">
-            <p className="text-lg md:text-xl text-neutral-300 leading-relaxed mb-8">
-              Our expertise is in designing visuals that effectively connect with the target audience. We create
-              memorable brand experiences through strategic design thinking and cutting-edge technology.
-            </p>
-            <Link
-              href="#contact"
-              className="inline-block py-4 px-8 bg-transparent border border-neutral-600 text-white no-underline rounded-full transition-all duration-300 ease-in-out hover:bg-white hover:text-black hover:-translate-y-1"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("contact");
-              }}
-            >
-              Work with us
-            </Link>
+      <section className="py-20 md:py-32" id="about">
+        <div className="container mx-auto px-5 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="relative w-full h-96 lg:h-[30rem]">
+              <Image
+                src="/image/6.webp"
+                alt="About Line Studio"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-lg"
+              />
+            </div>
+            <div>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">Design with Purpose</h2>
+              <p className="text-lg md:text-xl text-neutral-300 leading-relaxed mb-8">
+                Our expertise is in designing visuals that effectively connect with the target audience. We create
+                memorable brand experiences through strategic design thinking and cutting-edge technology.
+              </p>
+              <ul className="space-y-4 mb-10">
+                <li className="flex items-center gap-4">
+                  <span className="text-xl text-white">✓</span>
+                  <p className="text-neutral-300 text-lg">Insight-driven Strategy</p>
+                </li>
+                <li className="flex items-center gap-4">
+                  <span className="text-xl text-white">✓</span>
+                  <p className="text-neutral-300 text-lg">Human-centered Design</p>
+                </li>
+                <li className="flex items-center gap-4">
+                  <span className="text-xl text-white">✓</span>
+                  <p className="text-neutral-300 text-lg">Innovative Technology</p>
+                </li>
+              </ul>
+              <Link
+                href="#contact"
+                className="inline-block py-4 px-8 bg-transparent border border-neutral-600 text-white no-underline rounded-full"
+              >
+                Work with us
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 md:py-20 bg-neutral-900">
+      <section className="py-20 md:py-32 bg-neutral-900">
         <div className="container mx-auto px-5 md:px-10">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-12 md:gap-16 text-center">
-            <div className="stat-item opacity-0 translate-y-8 transition-all duration-500 ease-in-out">
-              <span className="stat-number block text-5xl font-bold text-white" data-target="19">
-                19
-              </span>
-              <span className="text-base text-neutral-300 mt-3 block">Featured work</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            {/* Stat Card 1 */}
+            <div className="stat-item bg-neutral-800/50 p-8 rounded-lg opacity-0 translate-y-8 transition-all duration-500 ease-in-out">
+              <FiBriefcase className="text-4xl text-white mx-auto mb-4" />
+              <span className="block text-5xl font-bold text-white">19+</span>
+              <h3 className="text-lg font-semibold text-neutral-300 mt-3">Featured Work</h3>
+              <p className="text-neutral-400 mt-2 text-sm">Recognized for excellence in design and development.</p>
             </div>
-            <div className="stat-item opacity-0 translate-y-8 transition-all duration-500 ease-in-out">
-              <span className="stat-number block text-5xl font-bold text-white" data-target="350">
-                350
-              </span>
-              <span className="text-base text-neutral-300 mt-3 block">Projects Completed</span>
+            {/* Stat Card 2 */}
+            <div className="stat-item bg-neutral-800/50 p-8 rounded-lg opacity-0 translate-y-8 transition-all duration-500 ease-in-out delay-150">
+              <FiBarChart2 className="text-4xl text-white mx-auto mb-4" />
+              <span className="block text-5xl font-bold text-white">350+</span>
+              <h3 className="text-lg font-semibold text-neutral-300 mt-3">Projects Completed</h3>
+              <p className="text-neutral-400 mt-2 text-sm">Delivering impactful solutions across various industries.</p>
             </div>
-            <div className="stat-item opacity-0 translate-y-8 transition-all duration-500 ease-in-out">
-              <span className="stat-number block text-5xl font-bold text-white" data-target="39">
-                39
-              </span>
-              <span className="text-base text-neutral-300 mt-3 block">Awwwards Featured</span>
+            {/* Stat Card 3 */}
+            <div className="stat-item bg-neutral-800/50 p-8 rounded-lg opacity-0 translate-y-8 transition-all duration-500 ease-in-out delay-300">
+              <FiAward className="text-4xl text-white mx-auto mb-4" />
+              <span className="block text-5xl font-bold text-white">39+</span>
+              <h3 className="text-lg font-semibold text-neutral-300 mt-3">Awwwards Featured</h3>
+              <p className="text-neutral-400 mt-2 text-sm">Honored by the most prestigious web design awards.</p>
             </div>
           </div>
         </div>
