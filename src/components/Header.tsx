@@ -2,16 +2,18 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 interface HeaderProps {
   scrollToSection: (sectionId: string) => void;
 }
 
 export default function Header({ scrollToSection }: HeaderProps) {
+  const [isVisible, setIsVisible] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 100);
+
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
       if (isScrolled !== scrolled) {
@@ -22,24 +24,26 @@ export default function Header({ scrollToSection }: HeaderProps) {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrolled]);
 
   return (
-    <motion.header
-      initial={{ y: "-100%" }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
-      className={`fixed top-0 left-0 right-0 w-full h-16 px-6 md:px-12 backdrop-blur-lg z-50 transition-colors duration-300 ${
-        scrolled ? "bg-black border-b border-gray-800" : "bg-transparent"
-      }`}
+    <header
+      className={`fixed top-0 left-0 right-0 w-full h-16 px-6 md:px-12 z-50 transition-all duration-500 ease-out ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      } ${scrolled ? "bg-black/80 backdrop-blur-lg border-b border-neutral-800" : "bg-transparent"}`}
       id="navbar"
     >
-      <nav className="max-w-7xl mx-auto flex justify-between items-center h-full px-10">
+      <nav className="max-w-7xl mx-auto flex justify-between items-center h-full">
         {/* Logo */}
         <Link
-          href="#"
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("home");
+          }}
           className="text-2xl md:text-3xl font-bold text-white no-underline transition-colors duration-300 hover:text-gray-300"
         >
           LINE Studio
@@ -97,6 +101,6 @@ export default function Header({ scrollToSection }: HeaderProps) {
           </li>
         </ul>
       </nav>
-    </motion.header>
+    </header>
   );
 }

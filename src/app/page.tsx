@@ -5,7 +5,7 @@ import Link from "next/link";
 import WorkCard from "../components/WorkCard";
 import ServiceCard from "../components/ServiceCard";
 import BlogCard from "../components/BlogCard";
-import Navigation from "../components/Navigation";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ParticleField from "@/components/ParticleField";
 import Image from "next/image";
@@ -131,7 +131,7 @@ export default function Home() {
   return (
     <div>
       {/* Navigation */}
-      <Navigation scrollToSection={scrollToSection} />
+      <Header scrollToSection={scrollToSection} />
 
       {/* Hero Section */}
       <section className="min-h-screen w-full relative overflow-hidden" id="home">
