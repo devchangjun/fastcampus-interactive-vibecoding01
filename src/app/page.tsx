@@ -7,6 +7,7 @@ import ServiceCard from "../components/ServiceCard";
 import BlogCard from "../components/BlogCard";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
+import ParticleField from "@/components/ParticleField";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -45,48 +46,10 @@ export default function Home() {
       observerRef.current?.observe(el);
     });
 
-    // Stats counter animation
-    const statsObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const counter = entry.target.querySelector(".stat-number") as HTMLElement;
-            const target = parseInt(counter.getAttribute("data-target") || "0");
-            animateCounter(counter, target);
-            statsObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    const statItems = document.querySelectorAll(".stat-item");
-    statItems.forEach((item) => {
-      statsObserver.observe(item);
-    });
-
     return () => {
       observerRef.current?.disconnect();
-      statsObserver.disconnect();
     };
   }, []);
-
-  // Counter animation function
-  const animateCounter = (element: HTMLElement, target: number, duration = 2000) => {
-    let start = 0;
-    const increment = target / (duration / 16);
-
-    const updateCounter = () => {
-      start += increment;
-      if (start < target) {
-        element.textContent = Math.floor(start).toString();
-        requestAnimationFrame(updateCounter);
-      } else {
-        element.textContent = target.toString();
-      }
-    };
-    updateCounter();
-  };
 
   // Email subscription handler
   const handleSubscribe = () => {
@@ -164,6 +127,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="min-h-screen w-full relative overflow-hidden" id="home">
+        <ParticleField />
         <div
           className="absolute top-0 left-0 w-full h-full -z-10"
           style={{
@@ -216,19 +180,19 @@ export default function Home() {
           <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-12 md:gap-16 text-center">
             <div className="stat-item opacity-0 translate-y-8 transition-all duration-500 ease-in-out">
               <span className="stat-number block text-5xl font-bold text-white" data-target="19">
-                0
+                19
               </span>
               <span className="text-base text-neutral-300 mt-3 block">Featured work</span>
             </div>
             <div className="stat-item opacity-0 translate-y-8 transition-all duration-500 ease-in-out">
               <span className="stat-number block text-5xl font-bold text-white" data-target="350">
-                0
+                350
               </span>
               <span className="text-base text-neutral-300 mt-3 block">Projects Completed</span>
             </div>
             <div className="stat-item opacity-0 translate-y-8 transition-all duration-500 ease-in-out">
               <span className="stat-number block text-5xl font-bold text-white" data-target="39">
-                0
+                39
               </span>
               <span className="text-base text-neutral-300 mt-3 block">Awwwards Featured</span>
             </div>
