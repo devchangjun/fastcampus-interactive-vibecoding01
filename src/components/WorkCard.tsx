@@ -1,6 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+
 interface WorkCardProps {
   id: number;
   title: string;
@@ -12,32 +15,44 @@ interface WorkCardProps {
 }
 
 export default function WorkCard({ id, title, category, award, image, index = 0, onViewMore }: WorkCardProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-35%", "35%"]);
+
   return (
-    <div
+    <motion.div
+      ref={ref}
       className="work-item h-[500px] md:h-[400px] lg:h-[500px] rounded-3xl overflow-hidden relative transition-all duration-500 ease-in-out cursor-pointer opacity-0 translate-y-12 group hover:-translate-y-4 hover:scale-[1.02] hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)]"
       style={{ transitionDelay: `${index * 0.1}s` }}
     >
-      <Image
-        src={image}
-        alt={title}
-        fill
-        className="object-cover z-10 transition-transform duration-75 ease-out will-change-transform"
-        style={{
-          objectPosition: "center",
-          transform: "scale(1.2) translateY(-5%)",
-        }}
-        onError={(e) => {
-          // Fallback to gradient if image fails to load
-          const target = e.target as HTMLElement;
-          target.style.display = "none";
-          const parent = target.parentElement;
-          if (parent) {
-            parent.style.background = `linear-gradient(135deg, hsl(${id * 60}, 70%, 60%) 0%, hsl(${
-              id * 60 + 30
-            }, 70%, 40%) 100%)`;
-          }
-        }}
-      />
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div className="absolute inset-0" style={{ y }}>
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-cover z-10 transition-transform duration-75 ease-out will-change-transform"
+            style={{
+              objectPosition: "center",
+              transform: "scale(1.2) translateY(-5%)",
+            }}
+            onError={(e) => {
+              // Fallback to gradient if image fails to load
+              const target = e.target as HTMLElement;
+              target.style.display = "none";
+              const parent = target.parentElement;
+              if (parent) {
+                parent.style.background = `linear-gradient(135deg, hsl(${id * 60}, 70%, 60%) 0%, hsl(${
+                  id * 60 + 30
+                }, 70%, 40%) 100%)`;
+              }
+            }}
+          />
+        </motion.div>
+      </div>
 
       {/* Main overlay */}
       <div
@@ -73,6 +88,6 @@ export default function WorkCard({ id, title, category, award, image, index = 0,
           background: "linear-gradient(135deg, rgba(42, 74, 214, 0.9) 0%, rgba(122, 53, 232, 0.9) 100%)",
         }}
       ></div>
-    </div>
+    </motion.div>
   );
 }

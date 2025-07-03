@@ -16,11 +16,18 @@ import CountUp from "@/components/CountUp";
 import Marquee from "@/components/Marquee";
 import ScrollTriggerText from "@/components/ScrollTriggerText";
 import SlideUp from "@/components/SlideUp";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [isAboutSectionScrolled, setIsAboutSectionScrolled] = useState(false);
+  const aboutImageRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: aboutImageRef,
+    offset: ["start end", "end start"],
+  });
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.3]);
 
   // Smooth scrolling function
   const scrollToSection = (sectionId: string) => {
@@ -187,14 +194,16 @@ export default function Home() {
       >
         <div className="container mx-auto px-5 md:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative w-full h-96 lg:h-[30rem]">
-              <Image
-                src="/image/6.webp"
-                alt="About Line Studio"
-                layout="fill"
-                objectFit="cover"
-                className="rounded-lg"
-              />
+            <div ref={aboutImageRef} className="relative w-full h-96 lg:h-[30rem] rounded-lg overflow-hidden">
+              <motion.div style={{ scale }} className="w-full h-full">
+                <Image
+                  src="/image/6.webp"
+                  alt="About Line Studio"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-lg"
+                />
+              </motion.div>
             </div>
             <div>
               <ScrambleText
