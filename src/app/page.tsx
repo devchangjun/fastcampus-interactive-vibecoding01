@@ -14,6 +14,7 @@ import TypingAnimation from "@/components/TypingAnimation";
 import ScrambleText from "@/components/ScrambleText";
 import CountUp from "@/components/CountUp";
 import Marquee from "@/components/Marquee";
+import ScrollTriggerText from "@/components/ScrollTriggerText";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -171,10 +172,14 @@ export default function Home() {
                 text="Design with Purpose"
                 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6"
               />
-              <p className="text-lg md:text-xl text-neutral-300 leading-relaxed mb-8">
+              <ScrollTriggerText
+                className="text-lg md:text-xl leading-relaxed mb-8"
+                fromColor="#737373"
+                toColor="#d4d4d4"
+              >
                 Our expertise is in designing visuals that effectively connect with the target audience. We create
                 memorable brand experiences through strategic design thinking and cutting-edge technology.
-              </p>
+              </ScrollTriggerText>
               <ul className="space-y-4 mb-10">
                 <li className="flex items-center gap-4">
                   <span className="text-xl text-white">✓</span>
