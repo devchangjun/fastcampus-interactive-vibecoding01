@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 interface HeaderProps {
@@ -10,6 +11,7 @@ interface HeaderProps {
 export default function Header({ scrollToSection }: HeaderProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100);
@@ -77,12 +79,10 @@ export default function Header({ scrollToSection }: HeaderProps) {
           </li>
           <li>
             <Link
-              href="#works"
-              className="text-white/90 no-underline font-medium text-sm md:text-base transition-colors duration-300 hover:text-white"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("works");
-              }}
+              href="/work"
+              className={`no-underline font-medium text-sm md:text-base transition-colors duration-300 hover:text-white ${
+                pathname === "/work" ? "text-white" : "text-white/90"
+              }`}
             >
               Works
             </Link>

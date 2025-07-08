@@ -8,6 +8,7 @@ import BlogCard from "../components/BlogCard";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ParticleField from "@/components/ParticleField";
+import IntroAnimation from "@/components/IntroAnimation";
 import Image from "next/image";
 import { FiAward, FiBarChart2, FiBriefcase } from "react-icons/fi";
 import TypingAnimation from "@/components/TypingAnimation";
@@ -17,11 +18,13 @@ import Marquee from "@/components/Marquee";
 import ScrollTriggerText from "@/components/ScrollTriggerText";
 import SlideUp from "@/components/SlideUp";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { portfolioItems, blogPosts } from "@/lib/portfolio-data";
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [isAboutSectionScrolled, setIsAboutSectionScrolled] = useState(false);
+
   const aboutImageRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: aboutImageRef,
@@ -95,307 +98,253 @@ export default function Home() {
     }
   };
 
-  // Portfolio data
-  const portfolioItems = [
-    {
-      id: 1,
-      title: "Creative Pulse",
-      category: "UI, UX, Development",
-      award: "CSS Award",
-      image: "/image/1.webp",
-    },
-    {
-      id: 2,
-      title: "Design Surge",
-      category: "Logo, User Interface",
-      award: "Awwwards",
-      image: "/image/2.webp",
-    },
-    {
-      id: 3,
-      title: "Vision Craft",
-      category: "Logo, User Interface",
-      award: "Awwwards",
-      image: "/image/3.webp",
-    },
-    {
-      id: 4,
-      title: "Brand Bloom",
-      category: "UI, UX, Development",
-      award: "CSS Award",
-      image: "/image/4.webp",
-    },
-    {
-      id: 5,
-      title: "Impact Edge",
-      category: "Font, User Interface",
-      award: "CSS Award",
-      image: "/image/5.webp",
-    },
-  ];
-
-  // Blog data
-  const blogPosts = [
-    {
-      id: 1,
-      title: "Understanding Framer CMS",
-      date: "April 12, 2025",
-      readTime: "5 min read",
-    },
-    {
-      id: 2,
-      title: "SEO Strategies for 2024",
-      date: "April 12, 2025",
-      readTime: "5 min read",
-    },
-    {
-      id: 3,
-      title: "Content Marketing Strategies",
-      date: "April 12, 2025",
-      readTime: "5 min read",
-    },
-  ];
+  // Show only first 5 items on home page
+  const homePortfolioItems = portfolioItems.slice(0, 5);
 
   return (
-    <div>
-      {/* Navigation */}
-      <Header scrollToSection={scrollToSection} />
+    <IntroAnimation>
+      <div>
+        {/* Navigation */}
+        <Header scrollToSection={scrollToSection} />
 
-      {/* Hero Section */}
-      <section className="min-h-screen w-full relative overflow-hidden" id="home">
-        <ParticleField />
-        <div
-          className="absolute top-0 left-0 w-full h-full -z-10"
-          style={{
-            background: "radial-gradient(circle at center, rgba(255, 255, 255, 0.02) 0%, rgba(10, 10, 10, 1) 70%)",
-          }}
-        ></div>
-        <div className="container mx-auto px-5 md:px-10 h-screen flex flex-col justify-center items-center text-center">
-          <TypingAnimation
-            text="Digital Creative Studio"
-            className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[8rem] font-bold leading-[0.9] mb-8 max-w-6xl text-white"
-          />
-          <SlideUp offset="translate-y-12" duration={1000} delay={500}>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-4xl mx-auto text-neutral-300 px-4">
-              Line Studio® is a versatile creative studio specializing in Branding, Web Design, and Development. We
-              empower clients to elevate their brands, expand their reach, and distinguish themselves in their industry
-              through impactful solutions and innovative design.
-            </p>
-          </SlideUp>
-        </div>
-      </section>
+        {/* Hero Section */}
+        <section className="min-h-screen w-full relative overflow-hidden" id="home">
+          <ParticleField />
+          <div
+            className="absolute top-0 left-0 w-full h-full -z-10"
+            style={{
+              background: "radial-gradient(circle at center, rgba(255, 255, 255, 0.02) 0%, rgba(10, 10, 10, 1) 70%)",
+            }}
+          ></div>
+          <div className="container mx-auto px-5 md:px-10 h-screen flex flex-col justify-center items-center text-center">
+            <TypingAnimation
+              text="Digital Creative Studio"
+              className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[8rem] font-bold leading-[0.9] mb-8 max-w-6xl text-white"
+            />
+            <SlideUp offset="translate-y-12" duration={1000} delay={500}>
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-4xl mx-auto text-neutral-300 px-4">
+                Line Studio® is a versatile creative studio specializing in Branding, Web Design, and Development. We
+                empower clients to elevate their brands, expand their reach, and distinguish themselves in their
+                industry through impactful solutions and innovative design.
+              </p>
+            </SlideUp>
+          </div>
+        </section>
 
-      {/* About Section */}
-      <section
-        className={`py-20 md:py-32 transition-colors duration-700 ${
-          isAboutSectionScrolled ? "bg-white" : "bg-transparent"
-        }`}
-        id="about"
-      >
-        <div className="container mx-auto px-5 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div ref={aboutImageRef} className="relative w-full h-96 lg:h-[30rem] rounded-lg overflow-hidden">
-              <motion.div style={{ scale }} className="w-full h-full">
-                <Image
-                  src="/image/6.webp"
-                  alt="About Line Studio"
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-lg"
+        {/* About Section */}
+        <section
+          className={`py-20 md:py-32 transition-colors duration-700 ${
+            isAboutSectionScrolled ? "bg-white" : "bg-transparent"
+          }`}
+          id="about"
+        >
+          <div className="container mx-auto px-5 md:px-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div ref={aboutImageRef} className="relative w-full h-96 lg:h-[30rem] rounded-lg overflow-hidden">
+                <motion.div style={{ scale }} className="w-full h-full">
+                  <Image
+                    src="/image/6.webp"
+                    alt="About Line Studio"
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-lg"
+                  />
+                </motion.div>
+              </div>
+              <div>
+                <ScrambleText
+                  text="Design with Purpose"
+                  className={`text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 transition-colors duration-700 ${
+                    isAboutSectionScrolled ? "text-black" : "text-white"
+                  }`}
                 />
-              </motion.div>
-            </div>
-            <div>
-              <ScrambleText
-                text="Design with Purpose"
-                className={`text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 transition-colors duration-700 ${
-                  isAboutSectionScrolled ? "text-black" : "text-white"
-                }`}
-              />
-              <ScrollTriggerText
-                className="text-lg md:text-xl leading-relaxed mb-8"
-                fromColor={isAboutSectionScrolled ? "#a3a3a3" : "#737373"}
-                toColor={isAboutSectionScrolled ? "#171717" : "#d4d4d4"}
-              >
-                Our expertise is in designing visuals that effectively connect with the target audience. We create
-                memorable brand experiences through strategic design thinking and cutting-edge technology.
-              </ScrollTriggerText>
-              <ul className="space-y-4 mb-10">
-                <li className="flex items-center gap-4">
-                  <span
-                    className={`text-xl transition-colors duration-700 ${
-                      isAboutSectionScrolled ? "text-black" : "text-white"
-                    }`}
-                  >
-                    ✓
+                <ScrollTriggerText
+                  className="text-lg md:text-xl leading-relaxed mb-8"
+                  fromColor={isAboutSectionScrolled ? "#a3a3a3" : "#737373"}
+                  toColor={isAboutSectionScrolled ? "#171717" : "#d4d4d4"}
+                >
+                  Our expertise is in designing visuals that effectively connect with the target audience. We create
+                  memorable brand experiences through strategic design thinking and cutting-edge technology.
+                </ScrollTriggerText>
+                <ul className="space-y-4 mb-10">
+                  <li className="flex items-center gap-4">
+                    <span
+                      className={`text-xl transition-colors duration-700 ${
+                        isAboutSectionScrolled ? "text-black" : "text-white"
+                      }`}
+                    >
+                      ✓
+                    </span>
+                    <p
+                      className={`text-lg transition-colors duration-700 ${
+                        isAboutSectionScrolled ? "text-neutral-700" : "text-neutral-300"
+                      }`}
+                    >
+                      Insight-driven Strategy
+                    </p>
+                  </li>
+                  <li className="flex items-center gap-4">
+                    <span
+                      className={`text-xl transition-colors duration-700 ${
+                        isAboutSectionScrolled ? "text-black" : "text-white"
+                      }`}
+                    >
+                      ✓
+                    </span>
+                    <p
+                      className={`text-lg transition-colors duration-700 ${
+                        isAboutSectionScrolled ? "text-neutral-700" : "text-neutral-300"
+                      }`}
+                    >
+                      Human-centered Design
+                    </p>
+                  </li>
+                  <li className="flex items-center gap-4">
+                    <span
+                      className={`text-xl transition-colors duration-700 ${
+                        isAboutSectionScrolled ? "text-black" : "text-white"
+                      }`}
+                    >
+                      ✓
+                    </span>
+                    <p
+                      className={`text-lg transition-colors duration-700 ${
+                        isAboutSectionScrolled ? "text-neutral-700" : "text-neutral-300"
+                      }`}
+                    >
+                      Innovative Technology
+                    </p>
+                  </li>
+                </ul>
+                <Link
+                  href="#contact"
+                  className={`inline-block py-4 px-8 border no-underline rounded-full transition-colors duration-500 relative overflow-hidden group ${
+                    isAboutSectionScrolled
+                      ? "border-neutral-400 text-black hover:bg-black hover:text-white"
+                      : "bg-transparent border-neutral-600 text-white hover:bg-white hover:text-black"
+                  }`}
+                >
+                  <span className="inline-block transition-transform duration-500 ease-in-out group-hover:-translate-y-[150%]">
+                    Work with us
                   </span>
-                  <p
-                    className={`text-lg transition-colors duration-700 ${
-                      isAboutSectionScrolled ? "text-neutral-700" : "text-neutral-300"
-                    }`}
-                  >
-                    Insight-driven Strategy
-                  </p>
-                </li>
-                <li className="flex items-center gap-4">
-                  <span
-                    className={`text-xl transition-colors duration-700 ${
-                      isAboutSectionScrolled ? "text-black" : "text-white"
-                    }`}
-                  >
-                    ✓
+                  <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-in-out translate-y-full group-hover:translate-y-0">
+                    Contact Us
                   </span>
-                  <p
-                    className={`text-lg transition-colors duration-700 ${
-                      isAboutSectionScrolled ? "text-neutral-700" : "text-neutral-300"
-                    }`}
-                  >
-                    Human-centered Design
-                  </p>
-                </li>
-                <li className="flex items-center gap-4">
-                  <span
-                    className={`text-xl transition-colors duration-700 ${
-                      isAboutSectionScrolled ? "text-black" : "text-white"
-                    }`}
-                  >
-                    ✓
-                  </span>
-                  <p
-                    className={`text-lg transition-colors duration-700 ${
-                      isAboutSectionScrolled ? "text-neutral-700" : "text-neutral-300"
-                    }`}
-                  >
-                    Innovative Technology
-                  </p>
-                </li>
-              </ul>
-              <Link
-                href="#contact"
-                className={`inline-block py-4 px-8 border no-underline rounded-full transition-colors duration-500 relative overflow-hidden group ${
-                  isAboutSectionScrolled
-                    ? "border-neutral-400 text-black hover:bg-black hover:text-white"
-                    : "bg-transparent border-neutral-600 text-white hover:bg-white hover:text-black"
-                }`}
-              >
-                <span className="inline-block transition-transform duration-500 ease-in-out group-hover:-translate-y-[150%]">
-                  Work with us
-                </span>
-                <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-in-out translate-y-full group-hover:translate-y-0">
-                  Contact Us
-                </span>
-              </Link>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Marquee Section */}
-      <section className="py-10 md:py-20">
-        <Marquee baseVelocity={-1} className="text-4xl md:text-6xl font-bold">
-          Line Studio® • Design with Purpose •&nbsp;
-        </Marquee>
-      </section>
+        {/* Marquee Section */}
+        <section className="py-10 md:py-20">
+          <Marquee baseVelocity={-1} className="text-4xl md:text-6xl font-bold">
+            Line Studio® • Design with Purpose •&nbsp;
+          </Marquee>
+        </section>
 
-      {/* Stats Section */}
-      <section className="py-20 md:py-32 bg-neutral-900">
-        <div className="container mx-auto px-5 md:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            {/* Stat Card 1 */}
-            <div className="stat-item bg-neutral-800/50 p-8 rounded-lg opacity-0 translate-y-8 transition-all duration-500 ease-in-out">
-              <FiBriefcase className="text-4xl text-white mx-auto mb-4" />
-              <CountUp endValue={19} suffix="+" className="block text-5xl font-bold text-white" />
-              <h3 className="text-lg font-semibold text-neutral-300 mt-3">Featured Work</h3>
-              <p className="text-neutral-400 mt-2 text-sm">Recognized for excellence in design and development.</p>
-            </div>
-            {/* Stat Card 2 */}
-            <div className="stat-item bg-neutral-800/50 p-8 rounded-lg opacity-0 translate-y-8 transition-all duration-500 ease-in-out delay-150">
-              <FiBarChart2 className="text-4xl text-white mx-auto mb-4" />
-              <CountUp endValue={350} suffix="+" className="block text-5xl font-bold text-white" />
-              <h3 className="text-lg font-semibold text-neutral-300 mt-3">Projects Completed</h3>
-              <p className="text-neutral-400 mt-2 text-sm">Delivering impactful solutions across various industries.</p>
-            </div>
-            {/* Stat Card 3 */}
-            <div className="stat-item bg-neutral-800/50 p-8 rounded-lg opacity-0 translate-y-8 transition-all duration-500 ease-in-out delay-300">
-              <FiAward className="text-4xl text-white mx-auto mb-4" />
-              <CountUp endValue={39} suffix="+" className="block text-5xl font-bold text-white" />
-              <h3 className="text-lg font-semibold text-neutral-300 mt-3">Awwwards Featured</h3>
-              <p className="text-neutral-400 mt-2 text-sm">Honored by the most prestigious web design awards.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Works Section */}
-      <section
-        className="fade-in py-20 md:py-30 px-5 md:px-10 max-w-7xl mx-auto opacity-0 translate-y-8 transition-all duration-700 ease-in-out"
-        id="works"
-      >
-        <h2 className="text-4xl mb-10 sm:text-5xl md:text-6xl font-bold text-center">Featured Works</h2>
-        <div className="grid grid-cols-1 gap-10 mt-10">
-          {portfolioItems.map((item, index) => (
-            <WorkCard
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              category={item.category}
-              award={item.award}
-              image={item.image}
-              index={index}
-              onViewMore={() => console.log(`View more for ${item.title}`)}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-20 md:py-30 bg-neutral-900">
-        <div className="container mx-auto px-5 md:px-10">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-16 md:mb-20">Our Services</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              <ServiceCard
-                icon="📊"
-                title="Strategy"
-                description="Insight-driven strategies that align your brand goals with market opportunities and user needs."
-                index={0}
-              />
-              <ServiceCard
-                icon="🎨"
-                title="UI Design"
-                description="Clean, intuitive interfaces that enhance usability and elevate the user experience across all platforms."
-                index={1}
-              />
-              <ServiceCard
-                icon="💻"
-                title="Web Design"
-                description="Modern, responsive websites designed to captivate users and drive engagement with your brand."
-                index={2}
-              />
+        {/* Stats Section */}
+        <section className="py-20 md:py-32 bg-neutral-900">
+          <div className="container mx-auto px-5 md:px-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+              {/* Stat Card 1 */}
+              <div className="stat-item bg-neutral-800/50 p-8 rounded-lg opacity-0 translate-y-8 transition-all duration-500 ease-in-out">
+                <FiBriefcase className="text-4xl text-white mx-auto mb-4" />
+                <CountUp endValue={19} suffix="+" className="block text-5xl font-bold text-white" />
+                <h3 className="text-lg font-semibold text-neutral-300 mt-3">Featured Work</h3>
+                <p className="text-neutral-400 mt-2 text-sm">Recognized for excellence in design and development.</p>
+              </div>
+              {/* Stat Card 2 */}
+              <div className="stat-item bg-neutral-800/50 p-8 rounded-lg opacity-0 translate-y-8 transition-all duration-500 ease-in-out delay-150">
+                <FiBarChart2 className="text-4xl text-white mx-auto mb-4" />
+                <CountUp endValue={350} suffix="+" className="block text-5xl font-bold text-white" />
+                <h3 className="text-lg font-semibold text-neutral-300 mt-3">Projects Completed</h3>
+                <p className="text-neutral-400 mt-2 text-sm">
+                  Delivering impactful solutions across various industries.
+                </p>
+              </div>
+              {/* Stat Card 3 */}
+              <div className="stat-item bg-neutral-800/50 p-8 rounded-lg opacity-0 translate-y-8 transition-all duration-500 ease-in-out delay-300">
+                <FiAward className="text-4xl text-white mx-auto mb-4" />
+                <CountUp endValue={39} suffix="+" className="block text-5xl font-bold text-white" />
+                <h3 className="text-lg font-semibold text-neutral-300 mt-3">Awwwards Featured</h3>
+                <p className="text-neutral-400 mt-2 text-sm">Honored by the most prestigious web design awards.</p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Blog Section */}
-      <section className="fade-in py-20 md:py-30 px-5 md:px-10 max-w-6xl mx-auto opacity-0 translate-y-8 transition-all duration-700 ease-in-out">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-16 md:mb-20">Latest Insights</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {blogPosts.map((post, index) => (
-            <BlogCard
-              key={post.id}
-              title={post.title}
-              date={post.date}
-              readTime={post.readTime}
-              index={index}
-              onClick={() => console.log(`Read more about ${post.title}`)}
-            />
-          ))}
-        </div>
-      </section>
+        {/* Works Section */}
+        <section
+          className="fade-in py-20 md:py-30 px-5 md:px-10 max-w-7xl mx-auto opacity-0 translate-y-8 transition-all duration-700 ease-in-out"
+          id="works"
+        >
+          <h2 className="text-4xl mb-10 sm:text-5xl md:text-6xl font-bold text-center">Featured Works</h2>
+          <div className="grid grid-cols-1 gap-10 mt-10">
+            {homePortfolioItems.map((item, index) => (
+              <WorkCard
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                category={item.category}
+                award={item.award}
+                image={item.image}
+                index={index}
+                onViewMore={() => console.log(`View more for ${item.title}`)}
+              />
+            ))}
+          </div>
+        </section>
 
-      {/* Footer */}
-      <Footer scrollToSection={scrollToSection} email={email} setEmail={setEmail} handleSubscribe={handleSubscribe} />
-    </div>
+        {/* Services Section */}
+        <section className="py-20 md:py-30 bg-neutral-900">
+          <div className="container mx-auto px-5 md:px-10">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-16 md:mb-20">Our Services</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <ServiceCard
+                  icon="📊"
+                  title="Strategy"
+                  description="Insight-driven strategies that align your brand goals with market opportunities and user needs."
+                  index={0}
+                />
+                <ServiceCard
+                  icon="🎨"
+                  title="UI Design"
+                  description="Clean, intuitive interfaces that enhance usability and elevate the user experience across all platforms."
+                  index={1}
+                />
+                <ServiceCard
+                  icon="💻"
+                  title="Web Design"
+                  description="Modern, responsive websites designed to captivate users and drive engagement with your brand."
+                  index={2}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Blog Section */}
+        <section className="fade-in py-20 md:py-30 px-5 md:px-10 max-w-6xl mx-auto opacity-0 translate-y-8 transition-all duration-700 ease-in-out">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-16 md:mb-20">Latest Insights</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {blogPosts.map((post, index) => (
+              <BlogCard
+                key={post.id}
+                title={post.title}
+                date={post.date}
+                readTime={post.readTime}
+                index={index}
+                onClick={() => console.log(`Read more about ${post.title}`)}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <Footer scrollToSection={scrollToSection} email={email} setEmail={setEmail} handleSubscribe={handleSubscribe} />
+      </div>
+    </IntroAnimation>
   );
 }
