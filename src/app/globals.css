@@ -19,6 +19,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Custom cursor styles */
+.cursor-none {
+  cursor: none !important;
+}
+
+.cursor-none * {
+  cursor: none !important;
+}
+
 /* Layout Container */
 .container {
   max-width: 1200px;
