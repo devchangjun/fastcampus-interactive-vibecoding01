@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎨 인터랙티브 웹개발 플레이그라운드
 
-## Getting Started
+패스트캠퍼스 인터랙티브 웹개발 강의를 위한 실습 프로젝트입니다.
 
-First, run the development server:
+## 🚀 시작하기
+
+### 1. 프로젝트 클론
+
+```bash
+git clone https://github.com/your-username/fastcampus-interactive-vibecoding01.git
+cd fastcampus-interactive-vibecoding01
+```
+
+### 2. 의존성 설치
+
+```bash
+npm install
+```
+
+### 2. 개발 서버 실행
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. 빌드
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. 프로덕션 실행
 
-## Learn More
+```bash
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🎯 브랜치별 학습 방법
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+각 브랜치를 체크아웃하여 단계별로 학습할 수 있습니다:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# 기본 플레이그라운드 (main 브랜치)
+git checkout main
 
-## Deploy on Vercel
+# 텍스트 애니메이션 기초
+git checkout feat/clip03
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 스크롤 애니메이션 심화
+git checkout feat/clip04
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 고급 인터랙션
+git checkout feat/clip05
+
+# 이미지 스테이지 애니메이션
+git checkout feat/clip06
+
+# 고급 3D 및 커스텀 인터랙션
+git checkout feat/clip07
+```
+
+## 📖 브랜치별 학습 내용
+
+각 브랜치는 특정 챕터의 구현 내용을 포함합니다:
+
+### 🎯 `main` 브랜치
+
+- **기본 플레이그라운드**: 기본적인 인터랙티브 웹사이트 구조
+- **주요 컴포넌트**: Navigation, ParticleField, WorkCard, ServiceCard, BlogCard, Footer
+- **학습 포인트**: 기본적인 React 컴포넌트 구조와 Tailwind CSS 활용
+
+### 🎯 `feat/clip03` 브랜치 - 텍스트 애니메이션 기초
+
+- **추가 컴포넌트**:
+  - `CountUp.tsx`: 숫자 카운트업 애니메이션
+  - `Marquee.tsx`: 마퀴 텍스트 효과
+  - `ScrambleText.tsx`: 텍스트 스크램블 효과
+  - `ScrollTriggerText.tsx`: 스크롤 트리거 텍스트 애니메이션
+  - `TypingAnimation.tsx`: 타이핑 애니메이션
+- **학습 포인트**: 텍스트 기반 인터랙티브 애니메이션 구현
+
+### 🎯 `feat/clip04` 브랜치 - 스크롤 애니메이션 심화
+
+- **추가 컴포넌트**:
+  - `Header.tsx`: 고급 헤더 컴포넌트
+  - `ParticleField.tsx`: 3D 파티클 시스템
+  - `SlideUp.tsx`: 슬라이드업 애니메이션
+- **학습 포인트**: 스크롤 기반 애니메이션과 3D 파티클 시스템
+
+### 🎯 `feat/clip05` 브랜치 - 고급 인터랙션
+
+- **추가 컴포넌트**:
+  - `Header.tsx`: 개선된 헤더
+  - `ParticleField.tsx`: 향상된 파티클 시스템
+  - `ScrambleText.tsx`: 고급 텍스트 스크램블
+  - `SlideUp.tsx`: 개선된 슬라이드업
+  - `WorkCard.tsx`: 고급 워크카드 (3604 bytes)
+- **학습 포인트**: 복합적인 인터랙션과 애니메이션 조합
+
+### 🎯 `feat/clip06` 브랜치 - 이미지 스테이지 애니메이션
+
+- **추가 컴포넌트**:
+  - `ImageStageAnimation.tsx`: 이미지 스테이지 애니메이션
+  - `IntroAnimation.tsx`: 인트로 애니메이션
+- **학습 포인트**: 이미지 기반 스테이지 애니메이션과 인트로 효과
+
+### 🎯 `feat/clip07` 브랜치 - 고급 3D 및 커스텀 인터랙션
+
+- **추가 컴포넌트**:
+  - `CustomCursor.tsx`: 커스텀 커서
+  - `ThreeBackground.tsx`: 3D 배경 시스템
+  - `TiltProfileCard.tsx`: 틸트 효과 프로필 카드
+  - `ImageStageAnimation.tsx`: 고급 이미지 스테이지
+  - `IntroAnimation.tsx`: 개선된 인트로 애니메이션
+- **학습 포인트**: 3D 배경, 커스텀 커서, 틸트 효과 등 고급 인터랙션
